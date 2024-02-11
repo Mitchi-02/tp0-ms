@@ -6,23 +6,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date;
+import java.util.Collection;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-public class Account {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String login;
+    @Column(nullable = false, length = 20)
+    private String name;
 
-    private String password;
+    @Column(unique = true)
+    private String email;
 
-    private Date created_at;
+    @Enumerated(EnumType.STRING)
+    private Sexe sexe;
 
     @ToString.Exclude
-    @ManyToOne
-    private Client client;
+    @OneToMany(mappedBy = "client")
+    private Collection<Account> accounts;
 }
