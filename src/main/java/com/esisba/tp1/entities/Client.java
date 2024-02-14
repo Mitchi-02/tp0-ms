@@ -8,6 +8,8 @@ import lombok.ToString;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Client {
@@ -25,6 +27,7 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private Sexe sexe;
 
+    @JsonIgnore
     @ToString.Exclude
     @OneToMany(mappedBy = "client")
     private Collection<Account> accounts;
